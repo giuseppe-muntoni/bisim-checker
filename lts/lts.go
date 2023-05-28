@@ -12,5 +12,5 @@ type Action struct {
 }
 
 type Graph struct {
-	processes map[string]Process
+	Processes map[string]Process
 }

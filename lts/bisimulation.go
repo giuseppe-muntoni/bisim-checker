@@ -1,12 +1,13 @@
 package lts
 
 type Equivalence struct {
-	firstGraphProc  []string
-	secondGraphProc []string
+	ID              string
+	FirstGraphProc  []string
+	SecondGraphProc []string
 }
 
 type Bisimulation struct {
-	firstGraph         Graph
-	secondGraph        Graph
-	equivalenceClasses []Equivalence
+	FirstGraph         Graph
+	SecondGraph        Graph
+	EquivalenceClasses map[string]Equivalence
 }
