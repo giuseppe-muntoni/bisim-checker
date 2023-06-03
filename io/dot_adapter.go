@@ -10,7 +10,7 @@ import (
 	"os"
 )
 
-func createBisimulationFromFiles(firstGraphPath string, secondGraphPath string) Result[Bisimulation] {
+func CreateBisimulationFromFiles(firstGraphPath string, secondGraphPath string) Result[Bisimulation] {
 	firstGraphReader := Make[io.Reader](os.Open(firstGraphPath))
 	secondGraphReader := Make[io.Reader](os.Open(secondGraphPath))
 
