@@ -11,7 +11,7 @@ func work(input <-chan InputRequest, output chan<- bool, termination chan error,
 	for {
 		select {
 		case request := <-input:
-			if err := ExecuteLinear(NewPair(request.firstGraphProcesses, request.secondGraphProcesses), graphs); err != nil {
+			if err := ExecuteLinear(NewPair(request.firstGraphProcesses, request.secondGraphProcesses), graphs); err == nil {
 				output <- true
 			} else {
 				termination <- err
@@ -27,7 +27,7 @@ func work(input <-chan InputRequest, output chan<- bool, termination chan error,
 func spawnWorkers(workers int, graphs Pair[*Graph, *Graph]) (chan<- InputRequest, <-chan bool, chan error) {
 	inputChannel := make(chan InputRequest)
 	outputChannel := make(chan bool)
-	terminationChannel := make(chan error)
+	terminationChannel := make(chan error, 1)
 	for i := 0; i < workers; i++ {
 		go work(inputChannel, outputChannel, terminationChannel, graphs)
 	}

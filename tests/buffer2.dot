@@ -1,0 +1,7 @@
+digraph buffer2 {
+    b2_0 -> b2_1 -> b2_2 [channel = in, send = f]
+    b2_2 -> b2_1 -> b2_0 [channel = out, send = t]
+    b2_0 [class = zero]
+    b2_1 [class = one]
+    b2_2 [class = two]
+}

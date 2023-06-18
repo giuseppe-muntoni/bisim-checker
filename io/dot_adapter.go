@@ -25,7 +25,7 @@ func CreateBisimulationFromFiles(firstGraphPath string, secondGraphPath string) 
 }
 
 func createBisimulation(firstGraph parser.Graph, secondGraph parser.Graph) Result[Bisimulation] {
-	var bisimulation Bisimulation
+	bisimulation := MakeBisimulation()
 
 	graph1, err := createGraph(firstGraph).Get()
 	if err != nil {
@@ -43,6 +43,7 @@ func createBisimulation(firstGraph parser.Graph, secondGraph parser.Graph) Resul
 	for key, value := range graph1.First {
 		if eqClass, present := bisimulation.EquivalenceClasses[key]; present {
 			eqClass.FirstGraphProc = append(eqClass.FirstGraphProc, value...)
+			bisimulation.EquivalenceClasses[key] = eqClass
 		} else {
 			bisimulation.EquivalenceClasses[key] = Equivalence{
 				ID:              key,
@@ -55,6 +56,7 @@ func createBisimulation(firstGraph parser.Graph, secondGraph parser.Graph) Resul
 	for key, value := range graph2.First {
 		if eqClass, present := bisimulation.EquivalenceClasses[key]; present {
 			eqClass.SecondGraphProc = append(eqClass.SecondGraphProc, value...)
+			bisimulation.EquivalenceClasses[key] = eqClass
 		} else {
 			bisimulation.EquivalenceClasses[key] = Equivalence{
 				ID:              key,
@@ -68,8 +70,8 @@ func createBisimulation(firstGraph parser.Graph, secondGraph parser.Graph) Resul
 }
 
 func createGraph(dotGraph parser.Graph) Result[Pair[map[string][]string, Graph]] {
-	var graph Graph
-	var eqClasses map[string][]string
+	graph := MakeGraph()
+	eqClasses := map[string][]string{}
 
 	if !dotGraph.IsDirect || dotGraph.IsStrict {
 		return Err[Pair[map[string][]string, Graph]](errors.New("Input graph must be direct and not strict"))
@@ -85,6 +87,7 @@ func createGraph(dotGraph parser.Graph) Result[Pair[map[string][]string, Graph]]
 			}
 			if processes, present := eqClasses[eqClass]; present {
 				processes = append(processes, process.ProcessID)
+				eqClasses[eqClass] = processes
 			} else {
 				eqClasses[eqClass] = []string{process.ProcessID}
 			}
@@ -104,6 +107,8 @@ func createGraph(dotGraph parser.Graph) Result[Pair[map[string][]string, Graph]]
 				return Err[Pair[map[string][]string, Graph]](errors.New("The process in the action does not exists"))
 			} else {
 				process.Actions = append(process.Actions, action)
+				graph.Processes[sourceProcess] = process
+				print("")
 			}
 		}
 	}
@@ -112,7 +117,7 @@ func createGraph(dotGraph parser.Graph) Result[Pair[map[string][]string, Graph]]
 }
 
 func createProcess(node parser.Node) Result[Pair[string, Process]] {
-	var process Process
+	process := MakeProcess()
 	eqClass := ""
 
 	for _, attributeMap := range node.Attributes {

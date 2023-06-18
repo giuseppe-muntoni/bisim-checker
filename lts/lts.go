@@ -12,5 +12,19 @@ type Action struct {
 }
 
 type Graph struct {
+	ID        string
 	Processes map[string]Process
+}
+
+func MakeProcess() Process {
+	return Process{
+		ProcessID: "",
+		Actions:   []Action{},
+	}
+}
+
+func MakeGraph() Graph {
+	return Graph{
+		Processes: map[string]Process{},
+	}
 }

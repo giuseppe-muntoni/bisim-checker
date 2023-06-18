@@ -39,7 +39,10 @@ func newGenerator(parDegree int, eqClasses []string, bisimulation lts.Bisimulati
 }
 
 func (gen *requestGenerator) generate() (InputRequest, bool) {
-	input := InputRequest{}
+	input := InputRequest{
+		firstGraphProcesses:  []string{},
+		secondGraphProcesses: []string{},
+	}
 
 	extracted := 0
 	class := gen.bisimulation.EquivalenceClasses[gen.eqClass]
@@ -62,7 +65,7 @@ func (gen *requestGenerator) generate() (InputRequest, bool) {
 
 			if gen.level >= gen.numberOfProcesses {
 				if len(gen.eqClasses) == 0 {
-					return InputRequest{}, false
+					return input, true
 				}
 
 				gen.eqClass, gen.eqClasses = gen.eqClasses[0], gen.eqClasses[1:]
@@ -78,7 +81,7 @@ func (gen *requestGenerator) generate() (InputRequest, bool) {
 
 		return gen.generate()
 	} else {
-		return input, true
+		return input, false
 	}
 }
 

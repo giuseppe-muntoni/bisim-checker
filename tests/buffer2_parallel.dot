@@ -1,0 +1,10 @@
+digraph buffer2_parallel {
+    b0_b0 -> b1_b0 -> b1_b1 [channel = in, send = f]
+    b0_b0 -> b0_b1 -> b1_b1 [channel = in, send = f]
+    b1_b1 -> b1_b0 -> b0_b0 [channel = out, send = t]
+    b1_b1 -> b0_b1 -> b0_b0 [channel = out, send = t]
+    b0_b0 [class = zero]
+    b1_b0 [class = one]
+    b0_b1 [class = one]
+    b1_b1 [class = two]
+}

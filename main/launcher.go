@@ -28,7 +28,7 @@ func main() {
 		fmt.Println(err.Error())
 	} else {
 		if err := checker.Emit(bisimulation, parDegree); err != nil {
-			fmt.Println(err.Error())
+			fmt.Println("Error: " + err.Error())
 		} else {
 			fmt.Println("Success!")
 		}
