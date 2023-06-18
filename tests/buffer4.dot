@@ -1,0 +1,9 @@
+digraph buffer4 {
+    b4_0 -> b4_1 -> b4_2 -> b4_3 -> b4_4 [channel = in, send = f]
+    b4_4 -> b4_3 -> b4_2 -> b4_1 -> b4_0 [channel = out, send = t]
+    b4_0 [class = zero]
+    b4_1 [class = one]
+    b4_2 [class = two]
+    b4_3 [class = three]
+    b4_4 [class = four]
+}

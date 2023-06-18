@@ -1,0 +1,105 @@
+digraph buffer4_parallel {
+    //empty buffer
+    b0_b0_b0_b0 -> b0_b0_b0_b1 [channel = in, send = f]
+    b0_b0_b0_b0 -> b0_b0_b1_b0 [channel = in, send = f]
+    b0_b0_b0_b0 -> b0_b1_b0_b0 [channel = in, send = f]
+    b0_b0_b0_b0 -> b1_b0_b0_b0 [channel = in, send = f]
+    b0_b0_b0_b0 [class = zero]
+
+    //one slot full
+    b0_b0_b0_b1 -> b0_b0_b1_b1 [channel = in, send = f]
+    b0_b0_b0_b1 -> b0_b1_b0_b1 [channel = in, send = f]
+    b0_b0_b0_b1 -> b1_b0_b0_b1 [channel = in, send = f]
+    b0_b0_b0_b1 -> b0_b0_b0_b0 [channel = out, send = t]
+
+    b0_b0_b1_b0 -> b0_b0_b1_b1 [channel = in, send = f]
+    b0_b0_b1_b0 -> b0_b1_b1_b0 [channel = in, send = f]
+    b0_b0_b1_b0 -> b1_b0_b1_b0 [channel = in, send = f]
+    b0_b0_b1_b0 -> b0_b0_b0_b0 [channel = out, send = t]
+
+    b0_b1_b0_b0 -> b0_b1_b0_b1 [channel = in, send = f]
+    b0_b1_b0_b0 -> b0_b1_b1_b0 [channel = in, send = f]
+    b0_b1_b0_b0 -> b1_b1_b0_b0 [channel = in, send = f]
+    b0_b1_b0_b0 -> b0_b0_b0_b0 [channel = out, send = t]
+
+    b1_b0_b0_b0 -> b1_b0_b0_b1 [channel = in, send = f]
+    b1_b0_b0_b0 -> b1_b0_b1_b0 [channel = in, send = f]
+    b1_b0_b0_b0 -> b1_b1_b0_b0 [channel = in, send = f]
+    b1_b0_b0_b0 -> b0_b0_b0_b0 [channel = out, send = t]
+
+    b0_b0_b0_b1 [class = one]
+    b0_b0_b1_b0 [class = one]
+    b0_b1_b0_b0 [class = one]
+    b1_b0_b0_b0 [class = one]
+
+    //two slots full
+    b0_b0_b1_b1 -> b1_b0_b1_b1 [channel = in, send = f]
+    b0_b0_b1_b1 -> b0_b1_b1_b1 [channel = in, send = f]
+    b0_b0_b1_b1 -> b0_b0_b1_b0 [channel = out, send = t]
+    b0_b0_b1_b1 -> b0_b0_b0_b1 [channel = out, send = t]
+
+    b0_b1_b0_b1 -> b1_b1_b0_b1 [channel = in, send = f]
+    b0_b1_b0_b1 -> b0_b1_b1_b1 [channel = in, send = f]
+    b0_b1_b0_b1 -> b0_b0_b0_b1 [channel = out, send = t]
+    b0_b1_b0_b1 -> b0_b1_b0_b0 [channel = out, send = t]
+
+    b0_b1_b1_b0 -> b1_b1_b1_b0 [channel = in, send = f]
+    b0_b1_b1_b0 -> b0_b1_b1_b1 [channel = in, send = f]
+    b0_b1_b1_b0 -> b0_b1_b0_b0 [channel = out, send = t]
+    b0_b1_b1_b0 -> b0_b0_b1_b0 [channel = out, send = t]
+
+    b1_b0_b0_b1 -> b1_b1_b0_b1 [channel = in, send = f]
+    b1_b0_b0_b1 -> b1_b0_b1_b1 [channel = in, send = f]
+    b1_b0_b0_b1 -> b1_b0_b0_b0 [channel = out, send = t]
+    b1_b0_b0_b1 -> b0_b0_b0_b1 [channel = out, send = t]
+
+    b1_b0_b1_b0 -> b1_b1_b1_b0 [channel = in, send = f]
+    b1_b0_b1_b0 -> b1_b0_b1_b1 [channel = in, send = f]
+    b1_b0_b1_b0 -> b1_b0_b0_b0 [channel = out, send = t]
+    b1_b0_b1_b0 -> b0_b0_b1_b0 [channel = out, send = t]
+
+    b1_b1_b0_b0 -> b1_b1_b1_b0 [channel = in, send = f]
+    b1_b1_b0_b0 -> b1_b1_b0_b1 [channel = in, send = f]
+    b1_b1_b0_b0 -> b1_b0_b0_b0 [channel = out, send = t]
+    b1_b1_b0_b0 -> b0_b1_b0_b0 [channel = out, send = t]
+
+    b0_b0_b1_b1 [class = two]
+    b0_b1_b0_b1 [class = two]
+    b0_b1_b1_b0 [class = two]
+    b1_b0_b0_b1 [class = two]
+    b1_b0_b1_b0 [class = two]
+    b1_b1_b0_b0 [class = two]
+
+    //three slots full
+    b1_b1_b1_b0 -> b1_b1_b1_b1 [channel = in, send = f]
+    b1_b1_b1_b0 -> b1_b1_b0_b0 [channel = out, send = t]
+    b1_b1_b1_b0 -> b1_b0_b1_b0 [channel = out, send = t]
+    b1_b1_b1_b0 -> b0_b1_b1_b0 [channel = out, send = t]
+
+    b1_b1_b0_b1 -> b1_b1_b1_b1 [channel = in, send = f]
+    b1_b1_b0_b1 -> b0_b1_b0_b1 [channel = out, send = t]
+    b1_b1_b0_b1 -> b1_b0_b0_b1 [channel = out, send = t]
+    b1_b1_b0_b1 -> b1_b1_b0_b0 [channel = out, send = t]
+
+    b1_b0_b1_b1 -> b1_b1_b1_b1 [channel = in, send = f]
+    b1_b0_b1_b1 -> b0_b0_b1_b1 [channel = out, send = t]
+    b1_b0_b1_b1 -> b1_b0_b0_b1 [channel = out, send = t]
+    b1_b0_b1_b1 -> b1_b0_b1_b0 [channel = out, send = t]
+
+    b0_b1_b1_b1 -> b1_b1_b1_b1 [channel = in, send = f]
+    b0_b1_b1_b1 -> b0_b0_b1_b1 [channel = out, send = t]
+    b0_b1_b1_b1 -> b0_b1_b0_b1 [channel = out, send = t]
+    b0_b1_b1_b1 -> b0_b1_b1_b0 [channel = out, send = t]
+
+    b1_b1_b1_b0 [class = three]
+    b1_b1_b0_b1 [class = three]
+    b1_b0_b1_b1 [class = three]
+    b0_b1_b1_b1 [class = three]
+
+    //full
+    b1_b1_b1_b1 -> b0_b1_b1_b1 [channel = out, send = t]
+    b1_b1_b1_b1 -> b1_b0_b1_b1 [channel = out, send = t]
+    b1_b1_b1_b1 -> b1_b1_b0_b1 [channel = out, send = t]
+    b1_b1_b1_b1 -> b1_b1_b1_b0 [channel = out, send = t]
+    b1_b1_b1_b1 [class = four]
+}

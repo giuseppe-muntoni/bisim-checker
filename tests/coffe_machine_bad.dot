@@ -1,0 +1,10 @@
+digraph coffe_machine_bad {
+    idle -> coffee [channel = coin, send = f]
+    idle -> tea [channel = coin, send = f]
+    coffee -> nil [channel = coffee, send = t]
+    tea -> nil [channel = tea, send = t]
+    idle [class = idle]
+    coffee [class = coin_inserted]
+    tea [class = coin_inserted]
+    nil [class = nil]
+}

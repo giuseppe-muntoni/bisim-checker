@@ -34,6 +34,9 @@ func newGenerator(parDegree int, eqClasses []string, bisimulation lts.Bisimulati
 	class := gen.bisimulation.EquivalenceClasses[gen.eqClass]
 	gen.numberOfProcesses = len(class.FirstGraphProc) + len(class.SecondGraphProc)
 	gen.blockSize = int(math.Ceil(float64(gen.numberOfProcesses) / float64(gen.parDegree)))
+	if gen.blockSize < 2 {
+		gen.blockSize = 2
+	}
 
 	return gen
 }
@@ -76,6 +79,9 @@ func (gen *requestGenerator) generate() (InputRequest, bool) {
 				class := gen.bisimulation.EquivalenceClasses[gen.eqClass]
 				gen.numberOfProcesses = len(class.FirstGraphProc) + len(class.SecondGraphProc)
 				gen.blockSize = int(math.Ceil(float64(gen.numberOfProcesses) / float64(gen.parDegree)))
+				if gen.blockSize < 2 {
+					gen.blockSize = 2
+				}
 			}
 		}
 
@@ -126,6 +132,7 @@ func Emit(bisimulation lts.Bisimulation, parDegree int) error {
 		}
 	}
 
+	termination <- nil
 	return nil
 }
 

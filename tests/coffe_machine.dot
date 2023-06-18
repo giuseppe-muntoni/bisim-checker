@@ -1,0 +1,8 @@
+digraph coffe_machine {
+    idle -> coin_inserted [channel = coin, send = f]
+    coin_inserted -> nil [channel = coffee, send = t]
+    coin_inserted -> nil [channel = tea, send = t]
+    idle [class = idle]
+    coin_inserted [class = coin_inserted]
+    nil [class = nil]
+}

@@ -19,6 +19,7 @@ func ExecuteLinear(processes Pair[[]string, []string], graphs Pair[*Graph, *Grap
 
 	if len(processes.First) == 0 {
 		processes.First, processes.Second = processes.Second, processes.First
+		graphs.First, graphs.Second = graphs.Second, graphs.First
 	}
 
 	firstProcess := NewPair(processes.First[0], graphs.First)

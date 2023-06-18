@@ -77,6 +77,7 @@ func createGraph(dotGraph parser.Graph) Result[Pair[map[string][]string, Graph]]
 		return Err[Pair[map[string][]string, Graph]](errors.New("Input graph must be direct and not strict"))
 	}
 
+	graph.ID = dotGraph.Name.OrElse("")
 	for _, statement := range dotGraph.Statements {
 		switch val := statement.(type) {
 		case *parser.Node:
